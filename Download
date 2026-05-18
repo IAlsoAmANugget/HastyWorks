@@ -1,0 +1,11 @@
+As instruçoes para download são:
+
+1. coloque os respectivos boots nos seus locais corretos sendo o serverboot no serverscriptservice e o clientboot no starterplayerscripts.
+2. confira se todas as libs do framework(client, server, shared e as libs do shared(essencialmente apenas a signal é obrigatoria) estão no replicated storage.
+3. confira se o client, server e shared lib estão dentro do loader/redirect do framework(arquivo/instacia chamada HastyWorks).
+4. confira se a lib signal esta dentro do shared.
+
+Se Se todas as instruções estiverem corretas agora para voce criar seus components voce deve seguir oque foi dito no file de explicações e métodos.
+
+Arquivo de download:
+
