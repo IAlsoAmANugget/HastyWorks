@@ -1,0 +1,35 @@
+
+05/05/2026 -
+Loader/Redirect criado.
+
+Adicionada biblioteca Signal no shared.
+
+Corrigida lógica do Loader (indexação de variáveis).
+
+Melhorado o redirecionamento de Proxy para métodos Shared.
+
+Mensagens de erro unificadas.
+
+Finalizado o Bootstrapper de ambos os lados.
+==
+
+06/05/2026 -
+Corrigida Dependência Circular na etapa de Resolve.
+
+Movida a criação do Dependency Proxy para o 'Start' (permite definições dinâmicas de 'Init').
+
+Otimizada a resolução de dependências com task.wait().
+
+Adicionada biblioteca Tagger no shared.
+==
+
+07/05/2026 -
+Adicionada "Eddition" ao loader (é muito foda fazer uma versão inteira pro seu framework).
+
+Correções de bugs.
+
+Testado em mais de 20 módulos.
+
+VERSÃO DE TESTES INICIAIS (1.0.0)
+==
+]]--
