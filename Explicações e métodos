@@ -1,0 +1,45 @@
+
+O HastyWorks do qual vou me referir como HW tem uma variedade de caracteristicas que, em fato, precisam ser explicadas.
+
+1. Desing. O HW é baseado em um modelo OO adaptado ao roblox do qual eu adaptei algumas outras coisas vindas de modelos ECS como:
+*Replicação entre multiplas "entidades". o framework é fácil de adaptar para sistemas que precisem de replicação entre diversas "entidades".
+*Componentes e seus tipos variam entre alguns fatores como side(client ou server), lifecycle(init, start, stop), blueprint(copia para hot reload) e alguns outros.
+
+2. Utilidades gerais básicas para o desenvolvimento no roblox:
+*Lifecycle(init, start, stop)
+*Dependencias(resolvidas por tabela com funçoes de return). por exemplo:
+-- Dependencies = {
+    A = function(hw)--o framework passa o side automaticamente para caso a dependencia seja um outro component
+        return hw:Get("A")
+    end,
+}
+local A = self.Dependencies.A
+A.sla("1234")
+A:slasoquecomself("1234")
+--
+*Blueprint(copia opcional para hot reload de segurança/fallback em caso de falha no boot ou erro interno no component/module)
+*Client(client table). é uma tabela de funçoes das quais voce coloca travas de segurança de sua escolha junto com a função desejada para poder ser executada pelo client side. o mesmo nao pode ser feito pelo server side por questões de segurança e separação entre client(inputs e requests) e server(logica e segurança).
+*Segurança simples por meio de proxies e travas pós lifecycle.
+*Call. metodo do framework(client side) para chamar metodos do servidor. o modelo é dispatcher, sendo mais especifico, assim:
+
+-- hw:Call("component")("metodo", ...) --
+
+3. Tipagem e boot dinamico:
+*O HW trabalha com boot dinamico por meio de uma "varredura" de modules dentro dos scripts de boot dos dois sides(client e server).
+*As caracteristicas para que o registro e boot de modules para components são as seguintes:
+-- local module = {
+    Identifier = "module", -- identificador para get e call em outros modules/components
+    Dependencies = {}, -- ja explicado.
+    Blueprint = nil, -- ja explicado também.
+}
+
+function module:Init(hw) -- assim como as dependencias o framework repassa ele mesmo para obtençao de components e outras features como o call. é opcional o lifecycle(isso torna flexivel pra components de configuração e outros).
+end
+function module:Start(hw) -- o proxy do module e suas dependencias é criado durante o start então todos os valores que dependem de alteraçao no proprio component devem ser feitos durante o init.
+end
+function module:Stop(hw)
+end
+
+return module --
+
+Em geral essas são as principais utilidades dentro do framework no quesito de desenvolvimento e organização.
